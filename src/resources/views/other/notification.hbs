@@ -1,0 +1,130 @@
+<head>
+    <title>Đăng Ký Tổ Hợp | Danh Sách Thông Báo</title>
+    <link rel="stylesheet" href="/css/school.css">
+    <link rel="stylesheet" href="/css/noti-generator.css">
+    <script>
+        const deleteNoti = async (id) => {
+            const notiId = id;
+            const result = await fetchAsync(`/notification/delete/m/${notiId}`, 'GET');
+            if(result.isSuccess) {
+                toastMessage("Thông báo", result.message, "success", 6000, "✅", 1000);
+            } else {
+                toastMessage("Thông báo", result.message, "error", 6000, "❌", 1000);
+            }
+            setTimeout(() => {
+                location.reload();
+            }, 3000)
+        }
+    </script>
+</head>
+
+<div id="master">
+    <div class="school-info">
+        <img class="school-banner" src="https://res.cloudinary.com/dwoymvppw/image/upload/v1752812401/school_banner_second_new_un0i6r.png">
+        <div class="banner-container">
+            <img class="school-banner-second" src="https://res.cloudinary.com/dwoymvppw/image/upload/v1743963404/school_banner_first_ezzd1f.png">
+            <div class="school-info-detail fs-5">
+                <img src="https://i.postimg.cc/fyNszfCN/bannertrencung.gif" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="box-radius shadow">
+        <div class="card-body p-0">
+            <div class="content" style="display: none;">
+                <div class="text-center">
+                    <h4 class="mb-2 text-center">Danh sách thông báo</h4>
+                    <p style="font-size: 14px; color: #666;">
+                        Đây là những thông báo được gửi đến tất cả học sinh để cập nhật thông tin quan trọng về tuyển sinh và các hoạt động học tập.
+                    </p>
+                </div>
+                <div class="d-flex justify-content-end container mb-2">
+                    <a href="/notification/generator"><i class="fa-solid fa-plus me-1"></i>Tạo thông báo mới</a>
+                </div>
+                <div class="container container-noti">
+                    {{#each notifications}}
+                        <div class="noti-box rounded-4">
+                            <h5 class="title pe-4">
+                                <a href="/notification/detail/{{this.id}}">{{this.title}}</a>
+                            </h5>
+
+                            <p class="timer mb-0">
+                                Tạo lúc: {{this.publishAt}}
+                            </p>
+
+                            <div class="list-icon">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis" class="svg-inline--fa fa-ellipsis " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"></path></svg>
+                                <ul class="opt-noti shadow hidden">
+                                    <a href="/notification/edit/{{this.id}}"><li>Chỉnh sửa</li></a>
+                                    <li onclick="deleteNoti('{{this.id}}')">Xoá</li>
+                                </ul>
+                            </div>
+                        </div>
+                    {{else}}
+                        <div class="img-box-not-noti mt-4 d-flex align-items-center flex-column">
+                            <img src="https://res.cloudinary.com/dwoymvppw/image/upload/v1752162309/error_xpgplu.png" alt="not data">
+                            <div class="text-center">
+                                <h6>Chưa có thông báo</h6>
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <div class="d-flex justify-content-center text-center">
+            <p class="footer-text mb-0">
+                © 2025 Trường THPT Duy Tân, Phường Quảng Phú, TP. Đà Nẵng.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div id="loading-full" class="position-fixed" style="display: flex;">
+    <div class="d-flex align-items-center flex-column">
+        <h2 style="font-family: 'Lexend', sans-serif;color:#29a9ef;">Đang tải dữ liệu...</h2>
+        <div class="spinner-border mt-4" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+
+<script type="module">
+    import { fetchAsync } from '/fetchAsync.js';
+    window.fetchAsync = fetchAsync;
+
+    window.addEventListener('load', function () {
+        document.getElementById('body-app').style.overflowY = 'auto';
+        document.getElementById('loading-full').style.display = 'none';
+        document.querySelector('.card-body .content').style.display = 'block';
+    });
+
+    const litSidebars = Array.from(document.querySelectorAll('#sidebar .box'));
+    litSidebars.pop();
+
+    litSidebars.forEach((li) => {
+        if(li.getAttribute('value') === 'Danh sách thông báo') {
+            li.parentElement.classList.add('active');
+        } 
+        else {
+            li.parentElement.classList.remove('active');
+        }
+        li.parentElement.onclick = () => {
+            li.parentElement.classList.add('active');
+            litSidebars.forEach((liCheckClassActive) => {
+                if(liCheckClassActive !== li) {
+                    liCheckClassActive.parentElement.classList.remove('active');
+                }
+            })
+        }
+    })
+
+    const iconOthers = document.querySelectorAll(".list-icon svg");
+    const listOption = document.querySelectorAll(".list-icon .opt-noti");
+
+    iconOthers.forEach((icon, index) => {
+        icon.onclick = () => {
+            listOption[index].classList.toggle("hidden");
+        }
+    })
+</script>

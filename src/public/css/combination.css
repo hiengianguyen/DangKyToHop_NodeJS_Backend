@@ -1,0 +1,149 @@
+.input-group-text {
+  height: 38px;
+  width: 46px;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.contact-of-parent,
+.table-points {
+  width: 100%; }
+
+.imgBoderFake {
+  width: 120px;
+  height: 160px;
+  border: 2px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.imgBoderFake > p {
+  color: #ccc;
+  font-size: 30px; }
+
+.inputImage,
+#inputImage {
+  padding: 0;
+  border: none; }
+
+.inputImage::file-selector-button #inputImage::file-selector-button {
+  font-weight: bold;
+  color: dodgerblue;
+  padding: 0.5em;
+  border: thin solid grey;
+  border-radius: 3px; }
+
+.resultImage,
+#resultImage {
+  width: 150px;
+  border: 1px solid #ccc;
+  padding: 0;
+  margin: 0 15px; }
+
+.box-choose-combination p {
+  min-width: max-content; }
+
+.box-choose-combination .box-select-1 {
+  margin-right: 10px; }
+
+.glass-overlay.active {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999; }
+
+.modal-container {
+  margin: 10px auto;
+  padding: 4pc;
+  margin-top: 0;
+  animation: modalFadeIn 1s; }
+
+.modal-content {
+  height: 50pc; }
+
+.modal-container.choose-school {
+  padding: 15pc; }
+
+.modal-content.choose-school {
+  height: 22pc; }
+
+.btn-show-modal p {
+  color: #007bff;
+  text-decoration: none;
+  background-color: transparent; }
+
+.btn-show-modal p:hover {
+  color: #7b03a7;
+  text-decoration: none;
+  background-color: transparent;
+  cursor: pointer; }
+
+.modal {
+  justify-content: center;
+  align-items: center; }
+
+.modal-footer {
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.2); }
+
+.modal-bodyy.combination {
+  padding: 4pc;
+  height: 32pc;
+  overflow: overlay; }
+
+.card-body.submit {
+  padding: 16px; }
+
+.header-box {
+  width: 100%;
+  height: 4pc;
+  background-color: #e3e3e3;
+  box-shadow: 0 -1px 4px; }
+
+.show-combination {
+  animation: modalFadeIn 1s; }
+
+.modal-contents,
+.show-combination .modal-containers {
+  background-color: #fff;
+  padding: 0; }
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0.6;
+    transform: translateY(-300px); }
+  to {
+    opacity: 1;
+    transform: translateY(0px); } }
+
+@media (max-width: 955px) and (orientation: landscape) {
+  .school-info {
+    display: flex;
+    height: 12pc;
+    margin: 0;
+    width: 100%; }
+  .school-info-detail {
+    top: 12px;
+    left: 8px; } }
+
+@media (max-width: 440px) {
+  .modal-containers,
+  .modal-container.choose-school {
+    padding: 0;
+    width: 19pc; }
+  .box-radius {
+    padding: 25px 15px;
+    margin: 0; }
+  .modal-bodyy.combination {
+    padding: 2pc; }
+  .modal-bodyy.combination .text,
+  .modal-bodyy.combination p {
+    text-align: justify; }
+  .card-body.submit {
+    padding: 0; }
+  .modal-content {
+    border-radius: unset;
+    border: 0; } }

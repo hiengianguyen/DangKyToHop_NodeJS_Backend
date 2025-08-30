@@ -1,0 +1,648 @@
+<head>
+    <title>Đăng Ký Tổ Hợp | Danh Sách Đã Đăng Ký</title>
+    <link rel="stylesheet" href="/css/school.css">
+    <link rel="stylesheet" href="/css/submited-list.css">
+    <link rel="stylesheet" href="/css/combination.css">
+</head>
+
+<div id="master">
+    <div id="banner" class="school-info">
+        <img class="school-banner" src="https://res.cloudinary.com/dwoymvppw/image/upload/v1752812401/school_banner_second_new_un0i6r.png">
+        <div class="banner-container">
+            <img class="school-banner-second" src="https://res.cloudinary.com/dwoymvppw/image/upload/v1743963404/school_banner_first_ezzd1f.png">
+            <div class="school-info-detail fs-5">
+                <img src="https://i.postimg.cc/fyNszfCN/bannertrencung.gif" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="box-radius shadow m-4" id="card-body">
+        <div class="card-body p-0" style="display: none;">
+            <div class="container-submited-list">
+                <div class="d-flex title">
+                    <h3 class="text-center m-0">
+                        {{#if isSavedPage}}
+                            Danh Sách Hồ Sơ Đã Lưu
+                        {{else}}
+                            Danh Sách Đã Đăng Ký
+                        {{/if}}
+                    </h3>
+                    <div id="box-export-excel" class="btn-group dropdown">
+                        <button type="button" class="btn btn-info dropdown-toggle" id="btn-export-excel" data-bs-toggle="dropdown" aria-expanded="false">
+                            Xuất file Excel
+                        </button>
+                        <ul id="dropdown-menu" class="dropdown-menu p-0">
+                            <li class="all-doc"><a href="/file/excel/submited-list" class="dropdown-item">Tất cả hồ sơ</a></li>
+                            <li class="filter">Hồ sơ đã lọc</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="filter-box d-flex my-3">
+                    <div class="d-flex align-items-center search-name-div border border-black">
+                        <i class="fa-solid fa-magnifying-glass mx-2"></i>
+                        <input class="ps-0" type="text" id="search-name-inp" name="fullName" style="border: none;outline:none;" placeholder="Tìm kiếm theo họ và tên...">
+                    </div>
+                    <button type="button" id="search-name-btn" class="btn btn-primary">Tìm kiếm</button>
+                </div>
+                <div class="d-flex radios-fil mb-3">
+                    <div class="card border-light gender mb-3">
+                        <div class="card-header">Giới tính:</div>
+                        <div class="card-body">
+                            <div class="radios-gender">
+                                <div id="radios-gender" class="gap-3">
+                                    <div class="form-check form-check-inline mb-2 me-2">
+                                        <input class="form-check-input" type="radio" name="gender" value="all" checked>
+                                        <label class="form-check-label">
+                                            Tất cả
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline mb-2 me-2">
+                                        <input class="form-check-input" type="radio" name="gender" value="Nam">
+                                        <label class="form-check-label">
+                                            Nam
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline mb-2 me-0">
+                                        <input class="form-check-input" type="radio" name="gender" value="Nữ">
+                                        <label class="form-check-label">
+                                            Nữ
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dash-height mx-3"></div>
+                    <div class="card border-light mb-3">
+                        <div class="card-header">Nguyện vọng 1:</div>
+                        <div class="card-body">
+                            <div class="radios-combination-1">
+                                <div id="radios-combination-1" class=" gap-3">
+                                    <div class="form-check form-check-inline mb-2 me-2">
+                                        <input class="form-check-input" type="radio" name="combination1" value="all" checked>
+                                        <label class="form-check-label">
+                                            Tất cả
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <div class="form-check form-check-inline mb-2 me-2">
+                                            <input class="form-check-input" type="radio" name="combination1" value="1">
+                                            <label class="form-check-label">
+                                                1
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline mb-2 me-2">
+                                            <input class="form-check-input" type="radio" name="combination1" value="2">
+                                            <label class="form-check-label">
+                                                2
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline mb-2 me-2">
+                                            <input class="form-check-input" type="radio" name="combination1" value="3">
+                                            <label class="form-check-label">
+                                                3
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline mb-2 me-2">
+                                            <input class="form-check-input" type="radio" name="combination1" value="4">
+                                            <label class="form-check-label">
+                                                4
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline mb-2 me-2">
+                                            <input class="form-check-input" type="radio" name="combination1" value="5">
+                                            <label class="form-check-label">
+                                                5
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline mb-2 me-0">
+                                            <input class="form-check-input" type="radio" name="combination1" value="6">
+                                            <label class="form-check-label">
+                                                6
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dash-height mx-3"></div>
+                    <div class="card border-light mb-3">
+                        <div class="card-header">Nguyện vọng 2:</div>
+                        <div class="card-body">
+                            <div class="radios-combination-2">
+                                <div id="radios-combination-2" class="gap-3">
+                                    <div class="form-check form-check-inline mb-2 me-2">
+                                        <input class="form-check-input" type="radio" name="combination2" value="all" checked>
+                                        <label class="form-check-label">
+                                            Tất cả
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <div class="form-check form-check-inline mb-2 me-2">
+                                            <input class="form-check-input" type="radio" name="combination2" value="1">
+                                            <label class="form-check-label">
+                                                1
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline mb-2 me-2">
+                                            <input class="form-check-input" type="radio" name="combination2" value="2">
+                                            <label class="form-check-label">
+                                                2
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline mb-2 me-2">
+                                            <input class="form-check-input" type="radio" name="combination2" value="3">
+                                            <label class="form-check-label">
+                                                3
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline mb-2 me-2">
+                                            <input class="form-check-input" type="radio" name="combination2" value="4">
+                                            <label class="form-check-label">
+                                                4
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline mb-2 me-2">
+                                            <input class="form-check-input" type="radio" name="combination2" value="5">
+                                            <label class="form-check-label">
+                                                5
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline mb-2 me-0">
+                                            <input class="form-check-input" type="radio" name="combination2" value="6">
+                                            <label class="form-check-label">
+                                                6
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dash-height mx-3"></div>
+                    <div class="card border-light mb-3">
+                        <div class="card-header">Trạng thái:</div>
+                        <div class="card-body">
+                            <div class="radios-is-approve">
+                                <div id="radios-is-approve" class="gap-3">
+                                    <div class="form-check form-check-inline mb-2 me-2">
+                                        <input class="form-check-input" type="radio" name="isApprove" value="all" checked>
+                                        <label class="form-check-label">
+                                            Tất cả
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline mb-2 me-2">
+                                        <input class="form-check-input" type="radio" name="isApprove" value="submitted">
+                                        <label class="form-check-label">
+                                            Đã nộp
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline mb-2 me-2">
+                                        <input class="form-check-input" type="radio" name="isApprove" value="approved">
+                                        <label class="form-check-label">
+                                            Đã phê duyệt
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline mb-2 me-0">
+                                        <input class="form-check-input" type="radio" name="isApprove" value="reject">
+                                        <label class="form-check-label">
+                                            Không phê duyệt
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="infor-quantity mb-3">
+                    {{#if (not isSavedPage)}}
+                        <p>Hiện tại đang có {{quantity}} học sinh đã đăng ký</p>
+                    {{/if}}
+                </div>
+                
+                <div class="sort-box sort-box-rep" style="display:none;">
+                    <div class="sort-title">
+                        <p class="m-0">
+                            Sắp xếp theo <i class="fa-solid fa-chevron-down sort-icon-title" style="font-size: 13px;"></i>
+                        </p>
+                    </div>
+                    <div class="sort-content">
+                        <ul class="list-sort p-0 m-0">
+                            <li class="sub-li-type title">Họ và tên <i style="font-size: 20px;"></i>
+                            </li>
+                            <li class="active sub-li-type type py-0">
+                                <ul class="ps-3">
+                                    <li class="p-2 type-sort" data-value="asc">Tăng dần (A-Z) <i class="ms-1 fa-solid"></i></li>
+                                    <li class="p-2 type-sort" data-value="desc">Giảm dần (Z-A) <i class="ms-1 fa-solid"></i></li>
+                                </ul>
+                            </li>
+                            <li class="title sub-li-type">Ngày đăng ký <i class="ms-1 title fa-solid fa-arrow-up-wide-short" style="font-size: 20px;"></i>
+                            </li>
+                            <li class="active sub-li-type type py-0">
+                                <ul class="ps-3">
+                                    <li class="p-2 type-sort" data-value="asc">Cũ nhất <i class="ms-1 fa-solid fa-check"></i></li>
+                                    <li class="p-2 type-sort" data-value="desc">Mới nhất <i class="ms-1 fa-solid"></i></li>
+                                </ul>
+                            </li>
+                            <li class="title sub-li-type">Điểm đầu vào <i style="font-size: 20px;"></i>
+                            </li>
+                            <li class="active sub-li-type type py-0">
+                                <ul class="ps-3">
+                                    <li class="p-2 type-sort" data-value="asc">Cao nhất <i class="ms-1 fa-solid"></i></li>
+                                    <li class="p-2 type-sort" data-value="desc">Thấp nhất <i class="ms-1 fa-solid"></i></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row" style="width: 100%;">
+                    <div id="container-submitted" class="col-11 g-0" style="padding: 0;">
+                        {{#each submitedList}}
+                            <div class="card mb-3 m-2 position-relative" value="{{this.id}}" style="width: 22pc;font-size: 12px;">
+                                <div class="d-flex g-0" style="position: relative;">
+                                    <div class="img-box col-md-4 p-0 text-center d-flex flex-column">
+                                        <img src="{{this.avatarLink}}" class="img-fluid avatar rounded-end border border-dark-subtle" alt="{{this.fullName}}" style="max-width:90%;">
+                                    </div>
+                                    <div class="col-md-8 px-0 position-relative">
+                                        <div class="card-body pt-2 pb-3 px-2">
+                                            <div class="name-status mb-2">
+                                                <p class="m-0">Họ và tên:</p>
+                                                <h6 class="card-title m-0" title="{{this.fullName}}">{{this.fullName}}</h6>
+                                            </div>
+
+                                            <div class="details">
+                                                <span class="d-flex align-items-center main">
+                                                    <p class="mb-0 me-2" title="Giới tính: {{this.gender}}">{{this.gender}}</p> • 
+                                                    <p class="mb-0 mx-2" title="Ngày sinh: {{this.dateOfBirth}}">{{this.dateOfBirth}}</p> • 
+                                                    <p class="mb-0 ms-2" title="Dân tộc: {{this.nation}}">{{this.nation}}</p>
+                                                </span>
+                                                <span title="Nguyện vọng 1: {{this.combination1}}">Nguyện vọng 1: {{this.combination1}}</span>
+                                                <span title="Nguyện vọng 2: {{this.combination2}}">Nguyện vọng 2: {{this.combination2}}</span>
+                                                <span class="time" title="Đăng ký lúc: {{this.registeredAt}}">{{this.registeredAt}}</span>
+                                            </div>
+                                            <a href="/combination/submited-detail/{{this.userId}}" class="btn btn-primary mt-2" style="width: max-content;font-size: 12px;">Xem thông tin</a>
+                                        </div>
+                                        <span class="badge badge-{{this.status}} position-absolute" title="Trạng thái" style="top: 8px; right:8px;">{{textBadge this.status}}</span>
+                                    </div>
+                                </div>
+                                <div class="position-absolute" style="bottom: 10px;right: 15px;">
+                                    <i title="Lưu hồ sơ này" value="{{this.id}}" class="fa-solid fa-bookmark save-doc-icon {{#if this.favourite}}saved{{/if}}"></i>
+                                </div>
+                            </div>
+                            {{else}}
+                             <div class="container not-data">
+                                <div class="d-flex justify-content-center align-items-center flex-column">
+                                    <img src="https://res.cloudinary.com/dwoymvppw/image/upload/v1749548858/no-data_bitdab.avif" alt="Không có dữ liệu">
+                                    <h3>Chưa có dữ liệu...</h3>
+                                    <p>Hiện tại vẫn chưa có bản nào được lưu!</p>
+                                </div>
+                            </div>
+                        {{/each}}
+                    </div>
+                    <div class="col sort-box-dad d-flex justify-content-center p-0">
+                        <div class="sort-box">
+                            <div class="sort-title">
+                                <p class="m-0">
+                                    Sắp xếp theo <i class="fa-solid fa-chevron-down sort-icon-title" style="font-size: 13px;"></i>
+                                </p>
+                            </div>
+                            <div class="sort-content">
+                                <ul class="list-sort p-0 m-0">
+                                    <li class="sub-li-type title">Họ và tên <i style="font-size: 20px;"></i>
+                                    </li>
+                                    <li class="active sub-li-type type py-0">
+                                        <ul class="ps-3">
+                                            <li class="p-2 type-sort" data-value="asc">Tăng dần <i class="ms-1 fa-solid"></i></li>
+                                            <li class="p-2 type-sort" data-value="desc">Giảm dần <i class="ms-1 fa-solid"></i></li>
+                                        </ul>
+                                    </li>
+                                    <li class="title sub-li-type">Ngày đăng ký <i class="ms-1 title fa-solid fa-arrow-up-wide-short" style="font-size: 20px;"></i>
+                                    </li>
+                                    <li class="active sub-li-type type py-0">
+                                        <ul class="ps-3">
+                                            <li class="p-2 type-sort" data-value="asc">Trước đó <i class="ms-1 fa-solid fa-check"></i></li>
+                                            <li class="p-2 type-sort" data-value="desc">Gần đây <i class="ms-1 fa-solid"></i></li>
+                                        </ul>
+                                    </li>
+                                    <li class="title sub-li-type">Điểm đầu vào <i style="font-size: 20px;"></i>
+                                    </li>
+                                    <li class="active sub-li-type type py-0">
+                                        <ul class="ps-3">
+                                            <li class="p-2 type-sort" data-value="asc">Cao nhất <i class="ms-1 fa-solid"></i></li>
+                                            <li class="p-2 type-sort" data-value="desc">Thấp nhất <i class="ms-1 fa-solid"></i></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <div class="d-flex justify-content-center text-center">
+            <p class="footer-text mb-0">
+                © 2025 Trường THPT Duy Tân, Phường Quảng Phú, TP. Đà Nẵng.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div id="loading-full" class="position-fixed" style="display: flex;">
+    <div class="d-flex align-items-center flex-column">
+        <h2 style="font-family: 'Lexend', sans-serif;color:#29a9ef;">Đang tải dữ liệu...</h2>
+        <div class="spinner-border mt-4" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+
+<form action="/file/excel/filter-submited-list" method="post" id="form-export-excel-filter" style="display: none;">
+    <input type="hidden" name="idSubmitteds" id="input-hid-idSubmitteds">
+</form>
+
+<script src="/renderCardSubmitted.js"></script>
+
+<script type="module">
+    import { fetchAsync } from '/fetchAsync.js';
+    import { filterSubmittedList } from '/filterSubmittedList.js';
+    import { convertVietnameseDatetimeToDateFe } from '/convertVietnameseDatetimeToDateFe.js';
+    // Gắn fetchAsync vào window để gọi được từ HTML
+    window.fetchAsync = fetchAsync;
+    window.filterSubmittedList = filterSubmittedList;
+    window.convertVietnameseDatetimeToDateFe = convertVietnameseDatetimeToDateFe;
+
+    const data = {{{submitedListData}}};
+    const btnSearchName = document.getElementById('search-name-btn');
+    const containerSubmitted = document.getElementById('container-submitted');
+    const radioGenders = document.getElementById('radios-gender').querySelectorAll('input');
+    const radioCombinations1 = document.getElementById('radios-combination-1').querySelectorAll('input');
+    const radioCombinations2 = document.getElementById('radios-combination-2').querySelectorAll('input');
+    const radioIsApprove = document.getElementById('radios-is-approve').querySelectorAll('input');
+    let result = data;
+
+    if(Array.from(containerSubmitted.querySelectorAll('.card')).length > 10) {
+        containerSubmitted.style.height = "45pc";
+        containerSubmitted.style.overflowY = 'scroll';
+    } else {
+        containerSubmitted.style.height = "auto";
+        containerSubmitted.style.overflowY = 'auto';
+    }
+
+    btnSearchName.onclick = () => {
+        result = filterSubmittedList(data);
+        setFeatureForIconSave();
+    }
+
+    Array.from(radioGenders).forEach((radio) => {
+        radio.onchange = () => {
+            result = filterSubmittedList(data);
+            setFeatureForIconSave();
+        }
+    })
+
+    Array.from(radioCombinations1).forEach((radio) => {
+        radio.onchange = () => {
+            result = filterSubmittedList(data);
+            setFeatureForIconSave();
+        }
+    })
+
+    Array.from(radioCombinations2).forEach((radio) => {
+        radio.onchange = () => {
+            result = filterSubmittedList(data);
+            setFeatureForIconSave();
+        }
+    })
+
+    Array.from(radioIsApprove).forEach((radio) => {
+        radio.onchange = () => {
+            result = filterSubmittedList(data);
+            setFeatureForIconSave();
+        }
+    })
+
+    var sideBar = document.getElementById('sidebar');
+    const master = document.getElementById('master');
+    window.addEventListener('load', function () {
+        const body = document.querySelector('body');
+        const banner = document.getElementById('banner');
+        const cardBody = document.getElementById('card-body');
+        document.getElementById('loading-full').style.display = 'none';
+        document.querySelector('.card-body').style.display = 'block';
+        document.getElementById('body-app').style.overflowY = 'auto';
+        if(body.clientHeight > (banner.clientHeight + cardBody.clientHeight)) {
+            body.querySelector('.d-flex').style.height = body.clientHeight;
+        } else {
+            body.querySelector('.d-flex').style.height = banner.clientHeight + cardBody.clientHeight;
+        }
+    });
+
+    const isSavedPage = {{{isSavedPage}}};
+
+    const litSidebars = Array.from(document.querySelectorAll('#sidebar .box'));
+    litSidebars.pop();
+
+    litSidebars.forEach((li) => {
+        if(isSavedPage ? li.getAttribute('value') === 'Hồ sơ đã lưu' : li.getAttribute('value') === 'Danh sách đăng ký') {
+            li.parentElement.classList.add('active');
+        } else {
+            li.parentElement.classList.remove('active');
+        }
+        li.parentElement.onclick = () => {
+        li.parentElement.classList.add('active')
+        litSidebars.forEach((liCheckClassActive) => {
+            if(liCheckClassActive !== li) {
+            liCheckClassActive.parentElement.classList.remove('active');
+            }
+        })
+        }
+    })
+
+    const sortTitles = document.querySelectorAll('.sort-title');
+    const sortContents = document.querySelectorAll('.sort-content');
+    const iconSortTitles = document.querySelectorAll('.sort-title .sort-icon-title');
+    const tagLisSort = document.querySelectorAll('.sort-content li:not(.type-sort)');
+    const typeSortI = document.querySelectorAll('.sort-content .type-sort i');
+
+    Array.from(tagLisSort).forEach((li, index) => {
+        if(index%2 === 0 && li.querySelector('i').className) {
+            Array.from(tagLisSort)[index + 1].classList.remove('active');
+        }
+        li.onclick = () => {
+            if (Array.from(tagLisSort)[index + 1]?.className.includes(' type')) {
+                Array.from(tagLisSort)[index + 1].classList.toggle('active');
+            }
+        }
+    })
+
+    Array.from(typeSortI).forEach((i, index) => {
+        i.parentElement.onclick = () => {
+            const valueTypeSort = i.parentElement.dataset.value;
+            i.classList.add('fa-check')
+            Array.from(typeSortI).forEach((iSub) => {
+                if(iSub !== i) {
+                    iSub.className = 'ms-1 fa-solid';
+                }
+            });
+  
+            const activeLi = getParentLi(i, 'sub-li-type');
+            const parentLi = activeLi.previousElementSibling;
+            const icon = valueTypeSort === 'asc' ? "ms-1 title fa-solid fa-arrow-up-wide-short" : "ms-1 title fa-solid fa-arrow-down-wide-short";
+            parentLi.querySelector('i').className = icon
+
+            Array.from(tagLisSort).forEach((liP) => {
+                if(liP !== parentLi && liP.className.includes('title')) {
+                    liP.querySelector('i').className = '';
+                }
+                if(liP.className.includes(' type') && liP !== activeLi) {
+                    liP.classList.add('active')
+                }
+            })
+
+            if(result.length > 1) {
+                switch(index) {
+                    case 0:
+                    case 1:
+                    case 6:
+                    case 7:
+                        result.sort((a, b) => {
+                            function getLastName(fullName) {
+                                const parts = fullName.trim().split(" ");
+                                return parts[parts.length - 1].toLowerCase();
+                            };
+
+                            const nameA = getLastName(a.fullName);
+                            const nameB = getLastName(b.fullName);
+
+                            if(valueTypeSort === 'asc') {
+                                return nameA.localeCompare(nameB);
+                            } else {
+                                return nameB.localeCompare(nameA);
+                            }
+                        });
+                        renderCardSubmitted(containerSubmitted, result);
+                        setFeatureForIconSave();
+                        break
+                    case 2:
+                    case 3:
+                    case 8:
+                    case 9:
+                        result.sort((a, b) => {
+                            if(valueTypeSort === 'asc') {
+                                return convertVietnameseDatetimeToDateFe(a.registeredAt) - convertVietnameseDatetimeToDateFe(b.registeredAt);
+                            } else {
+                                return convertVietnameseDatetimeToDateFe(b.registeredAt) - convertVietnameseDatetimeToDateFe(a.registeredAt);
+                            }
+                        });
+                        renderCardSubmitted(containerSubmitted, result);
+                        setFeatureForIconSave();
+                        break
+                    case 4:
+                    case 5:
+                    case 10:
+                    case 11:
+                        result.sort((a, b) => {
+                            const totalA = Number(a.mathScore || '0') + Number(a.literatureScore || '0') + Number(a.englishScore || '0');
+                            const totalB = Number(b.mathScore || '0') + Number(b.literatureScore || '0') + Number(b.englishScore || '0');
+
+                            if(valueTypeSort === 'asc') {
+                                return totalB - totalA;
+                            } else {
+                                return totalA - totalB;
+                            }
+                        });
+                        renderCardSubmitted(containerSubmitted, result);
+                        setFeatureForIconSave();
+                        break
+                }
+            }
+        }
+    })
+
+    sortTitles.forEach((sortBtnTiltle) => {
+        sortBtnTiltle.onclick = () => {
+            sortContents.forEach((sortContent) => {
+                sortContent.classList.toggle('active');
+                if(sortContent.className.includes('active')) {
+                    iconSortTitles.forEach((icon) => icon.className = "fa-solid fa-chevron-up")
+                } else {
+                    iconSortTitles.forEach((icon) => icon.className = "fa-solid fa-chevron-down")
+                }
+            })
+        }
+    })
+
+    function getParentLi(element, className) {
+       while(element.parentElement) {
+        if (element.parentElement.className.includes(className)) {
+          return element.parentElement
+        }
+        element = element.parentElement;
+       }
+    }
+
+    const btnExportExcel = document.getElementById('btn-export-excel');
+    const dropdownMenu = document.getElementById('dropdown-menu');
+    const btnExportFilter = dropdownMenu.querySelector('li.filter');
+    const formExportFilterExcel = document.getElementById('form-export-excel-filter');
+    const inputGetAllIdSubmitted = document.getElementById('input-hid-idSubmitteds');
+
+    btnExportFilter.onclick = () => {
+        const idSubmitteds = Array.from(containerSubmitted.querySelectorAll('.card')).map((card) => card.getAttribute('value'));
+        inputGetAllIdSubmitted.value = JSON.stringify(idSubmitteds);
+        formExportFilterExcel.submit();
+    }
+
+    btnExportExcel.onclick = () => {
+        btnExportExcel.setAttribute('aria-expanded', !(btnExportExcel.getAttribute('aria-expanded') === 'true'))
+        btnExportExcel.classList.toggle('show');
+        dropdownMenu.classList.toggle('show');
+    }
+    setFeatureForIconSave();
+    
+    function setFeatureForIconSave() {
+        const iconSaves = document.querySelectorAll('.save-doc-icon');
+        Array.from(iconSaves).forEach((icon) => {
+            if(icon.className.includes('saved')) {
+                icon.setAttribute('title', 'Gỡ lưu hồ sơ này');
+            } else {
+                icon.setAttribute('title', 'Lưu hồ sơ này');
+            }
+            icon.onclick = async () => {
+                const docId = icon.getAttribute('value');
+                icon.classList.toggle('saved');
+                if(!icon.className.includes('saved')) {
+                    icon.setAttribute('title', 'Gỡ lưu hồ sơ này');
+                    const result = await fetchAsync('/combination/unsave', 'POST', { docId: docId }, null, true);
+                    toastMessage("Thông báo", result.message, "success", 6000, "✅", 1000);
+                } else {
+                    icon.setAttribute('title', 'Lưu hồ sơ này');
+                    const result = await fetchAsync('/combination/save', 'POST', { docId: docId }, null, true);
+                    toastMessage("Thông báo", result.message, "success", 6000, "✅", 1000);
+                }
+            } 
+        })
+    }
+</script>

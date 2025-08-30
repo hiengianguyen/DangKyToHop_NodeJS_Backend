@@ -1,0 +1,50 @@
+$breakpoints: (
+  phone-v-sm: 345px,
+  phone-sm: 440px,
+  phone: 767px,
+  tablet: 768px,
+  tablet-lg: 935px,
+  desktop: 1400px,
+  screens-lg: 1920px
+);
+
+@mixin respond($bp) {
+  @if map-has-key($breakpoints, $bp) {
+    $value: map-get($breakpoints, $bp);
+
+    //Build media query
+    @media (max-width: $value) {
+      @content;
+    }
+  }
+}
+
+@mixin mobile-sm-landscape {
+  @media only screen and (max-width: 792px) and (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin mobile-lg-landscape {
+  @media only screen and (min-width: 792px) and (max-width: 955px) and (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media only screen and (min-width: 1200px) and (max-width: 1400px) {
+    @content;
+  }
+}
+
+@mixin table {
+  @media only screen and (min-width: 955px) and (max-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin mobile-all-landscape {
+  @media (max-width: 955px) and (orientation: landscape) {
+    @content;
+  }
+}

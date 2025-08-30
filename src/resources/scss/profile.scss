@@ -1,0 +1,103 @@
+@import "breakpoints";
+
+#master {
+  padding: 25px;
+  background-color: #29a9ef;
+}
+
+#all-content {
+  height: 100%;
+}
+
+.user-name {
+  margin: 0;
+  font-weight: 600;
+}
+
+img.profile-img-user {
+  width: 12pc;
+  border-radius: 50%;
+  transition: all 0.5s ease;
+}
+
+img.profile-img-user:hover {
+  opacity: 0.9;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  transition: all 0.5s ease;
+}
+
+.info-sub p {
+  font-size: 18px;
+}
+
+.profile-user {
+  align-self: center;
+  padding-bottom: 1pc;
+}
+
+.info.profile-dad-name {
+  margin: 0 3rem;
+}
+
+.profile-dad-name label {
+  font-weight: 600;
+}
+
+.card-body-profile {
+  width: 80%;
+}
+
+.btn-edit {
+  justify-content: end;
+}
+
+@include laptop {
+  #master,
+  #all-content {
+    height: auto !important;
+  }
+}
+
+@include mobile-all-landscape {
+  #header {
+    display: none;
+  }
+
+  #master {
+    padding: 1px !important;
+  }
+
+  #all-content,
+  .big-content {
+    height: max-content;
+  }
+
+  #sidebar {
+    height: 100%;
+  }
+}
+
+@include respond(phone-sm) {
+  #all-content {
+    background-color: #29a9ef;
+  }
+  .info.profile-dad-name,
+  .box-radius {
+    margin: 0;
+  }
+
+  img.profile-img-user {
+    width: 8pc;
+  }
+  .card-body-profile {
+    width: auto;
+  }
+
+  .btn-edit {
+    justify-content: center;
+  }
+
+  .btn-edit a {
+    font-size: 14px;
+  }
+}

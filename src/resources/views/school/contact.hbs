@@ -1,0 +1,117 @@
+<head>
+    <title>Đăng Ký Tổ Hợp | Liên Hệ</title>
+    <link rel="stylesheet" href="/css/school.css">
+    <link rel="stylesheet" href="/css/contact.css">
+</head>
+
+<div id="master">
+    <div class="school-info">
+        <img class="school-banner" src="https://res.cloudinary.com/dwoymvppw/image/upload/v1752812401/school_banner_second_new_un0i6r.png">
+        <div class="banner-container">
+            <img class="school-banner-second" src="https://res.cloudinary.com/dwoymvppw/image/upload/v1743963404/school_banner_first_ezzd1f.png">
+            <div class="school-info-detail fs-5">
+                <img src="https://i.postimg.cc/fyNszfCN/bannertrencung.gif" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="box-radius shadow">
+        <div class="card-body p-0">
+            <div class="content" style="display: none;">
+                <h4 class="mb-2 text-center">Thông tin Ban tuyển sinh trường THPT Duy Tân</h4>
+                <div class="contact-teacher d-flex align-items-center flex-column my-4">
+                    <div class="card mb-3 mt-2" style="width: 80%;">
+                        <div class="row g-0">
+                            <div class="img-box col-md-4">
+                                <img src="https://res.cloudinary.com/dwoymvppw/image/upload/v1743848084/default_user_avatar_dckymx.avif" class="img-fluid">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <div class="card-title d-flex">
+                                        <p class="mb-0 me-2">Thầy</p>
+                                        <h5 class="card-title name">Trần Bá Lĩnh</h5>
+                                    </div>
+                                    <div class="d-flex mb-4">
+                                        <p class="mb-0 me-2 info">Chức vụ: <b>Bí thư đoàn trường</b></p>
+                                    </div>
+                                    <p>Thông tin liên hệ:</p>
+                                    <div class="contact-box">
+                                        <p class="info">Số điện thoại: <b>0933162651</b></p>
+                                        <p class="info">Email: <b>tranbalinh@gmail.com</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3 mt-4" style="width: 80%;">
+                        <div class="row g-0">
+                            <div class="img-box col-md-4 d-flex justify-content-center">
+                                <img src="https://res.cloudinary.com/dwoymvppw/image/upload/v1743848084/default_user_avatar_dckymx.avif" class="img-fluid">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <div class="card-title d-flex">
+                                        <p class="mb-0 me-2">Cô</p>
+                                        <h5 class="card-title name">Nguyễn Hồng Hạnh</h5>
+                                    </div>
+                                    <div class="d-flex mb-4">
+                                        <p class="mb-0 me-2 info">Chức vụ: <b>Phó Bí thư đoàn trường</b></p>
+                                    </div>
+                                    <p>Thông tin liên hệ:</p>
+                                    <div class="contact-box">
+                                        <p class="info">Số điện thoại: <b>0933162651</b></p>
+                                        <p class="info">Email: <b>nguyenhonghanh@gmail.com</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <div class="d-flex justify-content-center text-center">
+            <p class="footer-text mb-0">
+                © 2025 Trường THPT Duy Tân, Phường Quảng Phú, TP. Đà Nẵng.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div id="loading-full" class="position-fixed" style="display: flex;">
+    <div class="d-flex align-items-center flex-column">
+        <h2 style="font-family: 'Lexend', sans-serif;color:#29a9ef;">Đang tải dữ liệu...</h2>
+        <div class="spinner-border mt-4" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.addEventListener('load', function () {
+        document.getElementById('body-app').style.overflowY = 'auto';
+        document.getElementById('loading-full').style.display = 'none';
+        document.querySelector('.card-body .content').style.display = 'block';
+    });
+
+    const litSidebars = Array.from(document.querySelectorAll('#sidebar .box'));
+    litSidebars.pop();
+
+    litSidebars.forEach((li) => {
+        if(li.getAttribute('value') === 'Liên hệ') {
+            li.parentElement.classList.add('active');
+        } 
+        else {
+            li.parentElement.classList.remove('active');
+        }
+        li.parentElement.onclick = () => {
+            li.parentElement.classList.add('active');
+            litSidebars.forEach((liCheckClassActive) => {
+                if(liCheckClassActive !== li) {
+                    liCheckClassActive.parentElement.classList.remove('active');
+                }
+            })
+        }
+    })
+</script>
