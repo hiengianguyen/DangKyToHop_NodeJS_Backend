@@ -36,6 +36,7 @@ class HomeController {
         return parseInt(stringNumberFirstA) - parseInt(stringNumberFirstB);
       });
       return res.json({
+        isSuccess: true,
         studentAchievements: studentAchievementsSorted
       });
     }
