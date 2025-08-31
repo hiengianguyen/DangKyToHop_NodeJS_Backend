@@ -129,13 +129,17 @@ class CombinationController {
           break;
       }
 
-      return res.render("combination/submited-detail", {
+      return res.json({
+        isSuccess: true,
         submitedCombinationDetail: data,
         showToast: req?.query?.toastmessage === "true",
         badge: badge
       });
     } else {
-      return res.redirect("/");
+      return res.json({
+        isSuccess: false,
+        message: "Bạn chưa đăng nhập"
+      });
     }
   }
 
@@ -152,10 +156,6 @@ class CombinationController {
         }),
         this.nationDbRef.getAllItems()
       ]);
-
-      if (step !== 1 && docSubmited.status === "approved") {
-        return res.redirect("back");
-      }
 
       //sort by name (asc)
       nations.sort((a, b) => (a.name > b.name ? 1 : -1));
