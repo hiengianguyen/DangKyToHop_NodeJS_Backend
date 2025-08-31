@@ -1,5 +1,6 @@
 class RegisteredCombinationModel {
   constructor(data = {}) {
+    this.id = data.id;
     this.numberMatriculation = data.numberMatriculation || "";
     this.fullName = data.fullName || "";
     this.gender = data.gender || "";

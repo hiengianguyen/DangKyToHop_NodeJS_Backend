@@ -45,6 +45,7 @@ class CombinationController {
       if (data) {
         const avatar = await uploadImageToCloudinary(data.avatar, "users");
         data.avatar = avatar.data;
+        data.registeredAt = new Date();
         const submitedCombinationModel = new RegisteredCombinationModel(data);
         const submitedByUserId = await this.registeredCombinationsDbRef.getItemByFilter({
           userId: data.userId
