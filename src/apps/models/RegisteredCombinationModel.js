@@ -54,6 +54,7 @@ class RegisteredCombinationModel {
   fromFirestore(doc) {
     if (!doc.exists) return null;
     const data = doc.data();
+    data.id = doc.id;
     return new RegisteredCombinationModel(data);
   }
 
