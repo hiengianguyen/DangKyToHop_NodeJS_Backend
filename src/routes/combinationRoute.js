@@ -9,6 +9,7 @@ router.get("/analytics", CombinationController.chart);
 router.get("/table", CombinationController.table);
 router.post("/update/:id", CombinationController.updateCombination);
 router.get("/submited-list", CombinationController.submitedList);
+router.post("/submited/sort", CombinationController.submitedSort);
 router.get("/submited-list/saved", CombinationController.savedSubmitted);
 router.get("/submit-combination", CombinationController.submitCombination);
 router.get("/delete/submited-combination/:id", CombinationController.delete);

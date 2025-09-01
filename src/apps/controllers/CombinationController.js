@@ -13,6 +13,7 @@ const { CollectionNameConstant } = require("../../constants");
 const { convertToVietnameseDateTime } = require("../../utils/convertToVietnameseDateTime");
 const { convertVietnameseDatetimeToDate } = require("../../utils/convertVietnameseDatetimeToDate");
 const { uploadImageToCloudinary } = require("../../utils/uploadImageToCloudinary");
+const { filterSubmittedList } = require("../../utils/filterSubmittedList");
 
 class CombinationController {
   constructor() {
@@ -37,6 +38,7 @@ class CombinationController {
     this.submitedApprove = this.submitedApprove.bind(this);
     this.submitedReject = this.submitedReject.bind(this);
     this.updateCombination = this.updateCombination.bind(this);
+    this.submitedSort = this.submitedSort.bind(this);
   }
 
   async submited(req, res, next) {
@@ -92,14 +94,16 @@ class CombinationController {
         }
       });
 
-      return res.render("combination/submited-list", {
-        quantity: data.length,
+      return res.json({
+        isSuccess: true,
         submitedList: data,
-        submitedListData: JSON.stringify(data),
         isSavedPage: false
       });
     } else {
-      return res.redirect("/");
+      return res.json({
+        isSuccess: false,
+        message: "Bạn chưa đăng nhập"
+      });
     }
   }
 
@@ -437,6 +441,17 @@ class CombinationController {
       message: "Huỷ phê duyệt hồ sơ thành công!",
       status: "Không phê duyệt",
       typeBadge: "danger"
+    });
+  }
+
+  async submitedSort(req, res, next) {
+    const filter = req.body;
+    const submittedList = await this.registeredCombinationsDbRef.getAllItems();
+    const finalData = filterSubmittedList(submittedList, filter);
+
+    return res.json({
+      isSuccess: true,
+      submittedListAfterSort: finalData
     });
   }
 }
