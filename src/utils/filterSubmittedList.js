@@ -1,101 +1,126 @@
-import { jsrmvi } from "/jsrmvi.js";
-const { removeVI } = jsrmvi;
+const { removeVI } = require("jsrmvi");
+const { convertVietnameseDatetimeToDate } = require("./convertVietnameseDatetimeToDate");
 
-function filterSubmittedList(data) {
+function filterSubmittedList(data, filter) {
   let result;
-  const searchName = document.getElementById("search-name-inp");
-  const valueName = searchName.value;
-  const containerSubmitted = document.getElementById("container-submitted");
-  const radioGenders = document.getElementById("radios-gender").querySelectorAll("input");
-  const radioCombinations1 = document.getElementById("radios-combination-1").querySelectorAll("input");
-  const radioCombinations2 = document.getElementById("radios-combination-2").querySelectorAll("input");
-  const radioIsApprove = document.getElementById("radios-is-approve").querySelectorAll("input");
-
-  const valueGender = Array.from(radioGenders).find((radio) => {
-    return radio.checked;
-  }).value;
-  const valueRadio1 = Array.from(radioCombinations1).find((radio) => {
-    return radio.checked;
-  }).value;
-  const valueRadio2 = Array.from(radioCombinations2).find((radio) => {
-    return radio.checked;
-  }).value;
-
-  let valueRadioApprove = Array.from(radioIsApprove).find((radio) => {
-    return radio.checked;
-  }).value;
 
   //filter combination 1,2.
-  if (valueRadio1 === "all" && valueRadio2 !== "all") {
+  if (filter.combination1 === "Tất cả" && filter.combination2 !== "Tất cả") {
     result = data.filter((doc, index) => {
-      return doc.combination2.includes(valueRadio2);
+      return doc.combination2.includes(filter.combination2);
     });
-  } else if (valueRadio2 === "all" && valueRadio1 !== "all") {
+  } else if (filter.combination2 === "Tất cả" && filter.combination1 !== "Tất cả") {
     result = data.filter((doc, index) => {
-      return doc.combination1.includes(valueRadio1);
+      return doc.combination1.includes(filter.combination1);
     });
   } else {
-    if (valueRadio2 === "all" && valueRadio1 === "all") {
+    if (filter.combination2 === "Tất cả" && filter.combination1 === "Tất cả") {
       result = data;
     } else {
       result = data.filter((doc) => {
-        return doc.combination1.includes(valueRadio1) && doc.combination2.includes(valueRadio2);
+        return doc.combination1.includes(filter.combination1) && doc.combination2.includes(filter.combination2);
       });
     }
   }
 
   if (result.length === 0) {
-    renderCardSubmitted(containerSubmitted, []);
     return [];
   }
 
   //filter Gender.
-  if (valueGender !== "all") {
+  if (filter.gender !== "Tất cả") {
     result = result.filter((doc) => {
-      return doc.gender === valueGender;
+      return doc.gender === filter.gender;
     });
   }
 
   if (result.length === 0) {
-    renderCardSubmitted(containerSubmitted, []);
     return [];
   }
 
   //filter Approve
-  if (valueRadioApprove !== "all") {
-    switch (valueRadioApprove) {
+  if (filter.status !== "Tất cả") {
+    switch (filter.status) {
       case "approved":
         result = result.filter((doc) => {
-          return doc.status === valueRadioApprove;
+          return doc.status === filter.status;
         });
         break;
       case "reject":
         result = result.filter((doc) => {
-          return doc.status === valueRadioApprove;
+          return doc.status === filter.status;
         });
         break;
       default:
         result = result.filter((doc) => {
-          return doc.status === valueRadioApprove;
+          return doc.status === filter.status;
         });
         break;
     }
   }
 
   if (result.length === 0) {
-    renderCardSubmitted(containerSubmitted, []);
     return [];
   }
 
   //filter Name.
-  if (valueName !== "") {
+  if (filter.fullName !== "") {
     result = result.filter((doc) => {
-      return removeVI(doc.fullName, { replaceSpecialCharacters: false }).includes(removeVI(valueName, { replaceSpecialCharacters: false }));
+      return removeVI(doc.fullName, { replaceSpecialCharacters: false }).includes(
+        removeVI(filter.fullName, { replaceSpecialCharacters: false })
+      );
     });
   }
 
-  renderCardSubmitted(containerSubmitted, result);
+  const sort = filter.sort;
+
+  if (sort) {
+    switch (sort.name) {
+      case "Họ và tên":
+        result.sort((a, b) => {
+          function getLastName(fullName) {
+            const parts = fullName.trim().split(" ");
+            return parts[parts.length - 1].toLowerCase();
+          }
+
+          const nameA = getLastName(a.fullName);
+          const nameB = getLastName(b.fullName);
+
+          if (sort.type === "asc") {
+            return nameA.localeCompare(nameB);
+          } else {
+            return nameB.localeCompare(nameA);
+          }
+        });
+        break;
+      case "Ngày đăng ký":
+        result.sort((a, b) => {
+          if (sort.type === "asc") {
+            return convertVietnameseDatetimeToDate(a.registeredAt) - convertVietnameseDatetimeToDate(b.registeredAt);
+          } else {
+            return convertVietnameseDatetimeToDate(b.registeredAt) - convertVietnameseDatetimeToDate(a.registeredAt);
+          }
+        });
+        break;
+      default:
+        result.sort((a, b) => {
+          const totalA = Number(a.mathPoint || "0") + Number(a.literaturePoint || "0") + Number(a.englishPoint || "0");
+          const totalB = Number(b.mathPoint || "0") + Number(b.literaturePoint || "0") + Number(b.englishPoint || "0");
+
+          if (sort.type === "asc") {
+            return totalB - totalA;
+          } else {
+            return totalA - totalB;
+          }
+        });
+    }
+  } else {
+    result.sort((a, b) => {
+      return convertVietnameseDatetimeToDate(a.registeredAt) - convertVietnameseDatetimeToDate(b.registeredAt);
+    });
+  }
+
   return result;
 }
 
-export { filterSubmittedList };
+module.exports = { filterSubmittedList };
