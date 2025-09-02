@@ -109,7 +109,7 @@ class CombinationController {
 
   async submitedDetail(req, res, next) {
     if (req?.cookies?.isLogin === "true" && req?.params?.userId) {
-      const userId = req?.params?.userId ?? req?.cookies?.userId;
+      const userId = req?.params?.userId;
       const data = await this.registeredCombinationsDbRef.getItemByFilter({
         userId: userId
       });
@@ -231,7 +231,7 @@ class CombinationController {
   }
 
   async savedSubmitted(req, res, next) {
-    const userId = req?.cookies?.userId;
+    const { userId } = req?.body;
     let allDocSubmittedSaved = await this.favouriteSubmittedDbRef.getItemsByFilter({
       userId: userId,
       isDeleted: false
@@ -239,7 +239,7 @@ class CombinationController {
 
     if (allDocSubmittedSaved) {
       allDocSubmittedSaved = await Promise.all(
-        allDocSubmittedSaved.map(async (docSaved) => await this.registeredCombinationsDbRef.getItemById(docSaved.submittedId))
+        allDocSubmittedSaved.map((docSaved) => this.registeredCombinationsDbRef.getItemById(docSaved.submittedId))
       );
 
       Array.from(allDocSubmittedSaved).forEach((doc) => {
@@ -249,9 +249,9 @@ class CombinationController {
       allDocSubmittedSaved = [];
     }
 
-    return res.render("combination/submited-list", {
+    return res.json({
+      isSuccess: true,
       submitedList: allDocSubmittedSaved,
-      submitedListData: JSON.stringify(allDocSubmittedSaved),
       isSavedPage: true
     });
   }
@@ -445,8 +445,7 @@ class CombinationController {
   }
 
   async submitedSort(req, res, next) {
-    const filter = req.body;
-    const submittedList = await this.registeredCombinationsDbRef.getAllItems();
+    const { submittedList, ...filter } = req.body;
     const finalData = filterSubmittedList(submittedList, filter);
 
     return res.json({

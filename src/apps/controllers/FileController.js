@@ -36,6 +36,7 @@ class FileController {
     const keys = [
       "STT",
       "Họ tên học sinh",
+      "Giới tính",
       "Ngày tháng năm sinh",
       "Trường học cấp 2",
       "Nguyện vọng 1",
@@ -54,19 +55,20 @@ class FileController {
       return {
         index: index + 1,
         fullName: row.fullName,
-        dateOfBirth: row.dateOfBirth,
-        secondarySchool: row.secondarySchool + ", " + (row.schoolDistrict || "") + ", " + "TP. Đà Nẵng",
+        gender: row.gender,
+        dayOfBirth: row.dayOfBirth,
+        secondarySchool: row.secondarySchool + ", " + (row.secondarySchoolDistrict || "") + ", " + "TP. Đà Nẵng",
         combination1: row.combination1,
         combination2: row.combination2,
-        mathScore: row.mathScore,
-        literatureScore: row.literatureScore,
-        englishScore: row.englishScore,
+        mathPoint: row.mathPoint,
+        literaturePoint: row.literaturePoint,
+        englishPoint: row.englishPoint,
         registeredAt: row.registeredAt,
-        fullNameDad: row.fullNameDad,
-        phoneOfDad: row.phoneOfDad,
-        fullNameMom: row.fullNameMom,
-        phoneOfMom: row.phoneOfMom,
-        phoneNumber: row.phoneNumber
+        fullNameDad: row.nameDad,
+        phoneOfDad: row.phoneDad,
+        fullNameMom: row.nameMom,
+        phoneOfMom: row.phoneMom,
+        phoneNumber: row.phone
       };
     });
     const buffer = exportExcelFile(rows, keys);
@@ -77,26 +79,12 @@ class FileController {
   }
 
   async exportSubmitedListFilterExcel(req, res, next) {
-    const idSubmitteds = JSON.parse(req?.body?.idSubmitteds);
-    let submitedList = await Promise.all(idSubmitteds.map(async (id) => await this.registeredCombinationsDbRef.getItemById(id)));
-
-    submitedList = await Promise.all(
-      submitedList.map(async (doc) => {
-        let phoneNumber;
-        if (doc.userId) {
-          const userSubmited = await this.userDBRef.getItemById(doc.userId);
-          phoneNumber = userSubmited.phone || "";
-        }
-        return {
-          ...doc,
-          phoneNumber: phoneNumber
-        };
-      })
-    );
+    const { submittedList } = req?.body;
 
     const keys = [
       "STT",
       "Họ tên học sinh",
+      "Giới tính",
       "Ngày tháng năm sinh",
       "Trường học cấp 2",
       "Nguyện vọng 1",
@@ -111,29 +99,28 @@ class FileController {
       "SĐT mẹ",
       "SĐT đăng ký"
     ];
-    const rows = submitedList.map((row, index) => {
+
+    const rows = submittedList.map((row, index) => {
       return {
         index: index + 1,
         fullName: row.fullName,
-        dateOfBirth: row.dateOfBirth,
-        secondarySchool: row.secondarySchool + ", " + (row.schoolDistrict || "") + ", " + "TP. Đà Nẵng",
+        gender: row.gender,
+        dayOfBirth: row.dayOfBirth,
+        secondarySchool: row.secondarySchool + ", " + (row.secondarySchoolDistrict || "") + ", " + "TP. Đà Nẵng",
         combination1: row.combination1,
         combination2: row.combination2,
-        mathScore: row.mathScore,
-        literatureScore: row.literatureScore,
-        englishScore: row.englishScore,
+        mathPoint: row.mathPoint,
+        literaturePoint: row.literaturePoint,
+        englishPoint: row.englishPoint,
         registeredAt: row.registeredAt,
-        fullNameDad: row.fullNameDad,
-        phoneOfDad: row.phoneOfDad,
-        fullNameMom: row.fullNameMom,
-        phoneOfMom: row.phoneOfMom,
-        phoneNumber: row.phoneNumber
+        fullNameDad: row.nameDad,
+        phoneOfDad: row.phoneDad,
+        fullNameMom: row.nameMom,
+        phoneOfMom: row.phoneMom,
+        phoneNumber: row.phone
       };
     });
     const buffer = exportExcelFile(rows, keys);
-
-    res.setHeader("Content-Disposition", "attachment; filename=DanhSachDangKy.xlsx");
-    res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
     return res.send(buffer);
   }
 
