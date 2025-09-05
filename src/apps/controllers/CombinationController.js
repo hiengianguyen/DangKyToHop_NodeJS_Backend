@@ -1,6 +1,5 @@
 const {
   FirestoreModel,
-  SubjectModel,
   CombinationModel,
   NationModel,
   RegisteredCombinationModel,
@@ -18,7 +17,6 @@ const { filterSubmittedList } = require("../../utils/filterSubmittedList");
 class CombinationController {
   constructor() {
     this.userDbRef = new FirestoreModel(CollectionNameConstant.Users, UserModel);
-    this.subjectDbRef = new FirestoreModel(CollectionNameConstant.Subjects, SubjectModel);
     this.nationDbRef = new FirestoreModel(CollectionNameConstant.Nations, NationModel);
     this.secondarySchoolDbRef = new FirestoreModel(CollectionNameConstant.SecondarySchools, SecondarySchoolModel);
     this.registeredCombinationsDbRef = new FirestoreModel(CollectionNameConstant.RegisteredCombinations, RegisteredCombinationModel);
@@ -342,22 +340,12 @@ class CombinationController {
 
   async table(req, res, next) {
     if (req?.cookies?.isLogin === "true" && req?.cookies?.userId) {
-      let [subjects, combinations] = await Promise.all([this.subjectDbRef.getAllItems(), this.combinationDbRef.getAllItems()]);
-
-      subjects.map((subject) => {
-        return subject.docs;
-      });
-      //sort by name (asc)
+      const combinations = await this.combinationDbRef.getAllItems();
       combinations.sort((a, b) => (a.name > b.name ? 1 : -1));
-
-      combinations.forEach((combination) => {
-        const compulsorySubjects = combination.compulsorySubjects;
-        const optionalSubjects = combination.optionalSubjects;
-
-        combination.compulsorySubjects = subjects.filter((subject) => compulsorySubjects.includes(subject.name));
-        combination.optionalSubjects = subjects.filter((subject) => optionalSubjects.includes(subject.name));
+      return res.json({
+        isSuccess: true,
+        combinations: combinations
       });
-      return res.json({ combinations });
     } else {
       return res.json({ isSuccess: false });
     }
