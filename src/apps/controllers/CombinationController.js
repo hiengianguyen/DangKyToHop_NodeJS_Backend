@@ -360,15 +360,13 @@ class CombinationController {
     const ok = await this.combinationDbRef.updateItem(combinationId, data);
     if (ok) {
       return res.json({
-        message: "Cập nhật thông tin tổ hợp thành công",
-        type: "success",
-        icon: "✅"
+        isSuccess: true,
+        message: "Cập nhật thông tin tổ hợp thành công"
       });
     } else {
       return res.json({
-        message: "Cập nhật thông tin tổ hợp không thành công",
-        type: "error",
-        icon: "❌"
+        isSuccess: false,
+        message: "Cập nhật thông tin tổ hợp không thành công"
       });
     }
   }
