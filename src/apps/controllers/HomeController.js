@@ -1,11 +1,8 @@
-const { FirestoreModel, HighSchoolModel, CombinationModel, SubjectModel, ImageActivityModel } = require("../models");
+const { FirestoreModel, ImageActivityModel } = require("../models");
 const { CollectionNameConstant } = require("../../constants");
 
 class HomeController {
   constructor() {
-    this.highSchoolDbRef = new FirestoreModel(CollectionNameConstant.HighSchools, HighSchoolModel);
-    this.combinationDbRef = new FirestoreModel(CollectionNameConstant.Combinations, CombinationModel);
-    this.subjectDbRef = new FirestoreModel(CollectionNameConstant.Subjects, SubjectModel);
     this.imageActivityDbRef = new FirestoreModel(CollectionNameConstant.ImageActivity, ImageActivityModel);
     this.homePage = this.homePage.bind(this);
   }
