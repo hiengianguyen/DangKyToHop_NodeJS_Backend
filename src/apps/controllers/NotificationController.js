@@ -48,15 +48,16 @@ class NotificationController {
     if (req?.cookies?.isLogin === "true") {
       const notiId = req?.params?.id;
       const notification = await this.notiDBRef.getItemById(notiId);
-      if (!notification) {
-        return res.redirect("back");
-      }
 
-      return res.render("other/notification-edit", {
+      return res.json({
+        isSuccess: true,
         notification: notification
       });
     } else {
-      return res.redirect("/");
+      return res.json({
+        isSuccess: true,
+        message: "Bạn chưa đăng nhập"
+      });
     }
   }
 
@@ -135,13 +136,11 @@ class NotificationController {
       if (response) {
         return res.json({
           message: "Gữi thông báo thành công",
-          type: "success",
           isSuccess: true
         });
       } else {
         return res.json({
           message: "Gữi thông báo không thành công",
-          type: "errer",
           isSuccess: false
         });
       }
@@ -152,7 +151,8 @@ class NotificationController {
 
   async updateNoti(req, res, next) {
     if (req?.cookies?.isLogin === "true") {
-      const { id, title = null, message = null, fileUrl = null, type = "text" } = req.body;
+      const id = req?.params?.id;
+      const { title = null, message = null, fileUrl = null, type = "text" } = req.body;
 
       let typeNoti = type;
       if (fileUrl) {
@@ -171,18 +171,20 @@ class NotificationController {
       if (response) {
         return res.json({
           message: "Cập nhật thông báo thành công",
-          type: "success",
+          id: id,
           isSuccess: true
         });
       } else {
         return res.json({
           message: "Cập nhật thông báo không thành công",
-          type: "errer",
           isSuccess: false
         });
       }
     } else {
-      return res.redirect("/");
+      return res.json({
+        isSuccess: false,
+        message: "Bạn chưa đăng nhập"
+      });
     }
   }
 
@@ -190,7 +192,10 @@ class NotificationController {
     if (req?.cookies?.isLogin === "true") {
       return res.render("other/notification-generator-info");
     } else {
-      return res.redirect("/");
+      return res.json({
+        isSuccess: false,
+        message: "Bạn chưa đăng nhập"
+      });
     }
   }
 }
